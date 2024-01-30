@@ -1,0 +1,356 @@
+{% load static %}
+{% load i18n %}
+
+{% get_current_language as current_language %}
+{% get_available_languages as available_languages %}
+{% get_language_info_list for available_languages as langs %}
+{% get_language_info for current_language as lang_info %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- TITLE for website -->
+    <title>MegaSoft | {% block title %}{% endblock title %}</title>
+
+    <!-- CSS file links below -->
+    <link rel="stylesheet" href="{% static 'css/main.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/fonts.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/icons.css' %}" />
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+{% block stylesheet %}
+<style>
+  .message{
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: #ffffff;
+  color: black;
+  border-radius: 8px;
+  text-align: center;
+  }
+  .msg-success{
+  margin-bottom: 10px;
+  color: green;
+  }
+  .msg-error{
+  margin-bottom: 10px;
+  color: rgb(231, 38, 54);
+  }
+  
+  
+  </style>
+  
+
+{% endblock stylesheet %}
+    <style>
+      /* Dropdown Button */
+.dropbtn {
+  background: transparent;
+  color: #ffffff;
+  font-size: 16px;
+  border: 2px;
+  border-radius: 10px 20px 30px 40px;
+  cursor: pointer;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 10;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #ddd;}
+
+/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+.show {display:block;}
+    </style>
+  </head>
+<body>
+
+      <!--====================================== Start NAVBAR section ======================================-->
+      <nav class="site-nav">
+        <!-- Site LOGO -->
+        <div class="site-nav__container">
+          <div class="site-nav-logo">
+            <a href="{% url 'index' %}" class="site-nav-logo__item"
+              ><img src="{% static 'assets/icons/site-logo.svg' %}" class="site-logo site-nav__logo-img"></a
+            >
+          </div>
+          <!-- SITENAV menu -->
+          <div class="site-nav-menu">
+            <ul class="site-nav-menu__list">
+              <li class="site-nav__list">
+                <a href="{% url 'index' %}" class="site-nav__link active">{% translate "Bosh sahifa"%}</a>
+              </li>
+              <li class="site-nav__list">
+                <a href="{% url 'about' %}" class="site-nav__link">{% translate "Biz haqimizda" %}</a>
+              </li>
+              <li class="site-nav__list">
+                <a href="{% url 'portfolio' %}" class="site-nav__link">{% trans "Portfolio" %}</a>
+              </li>
+              <li class="site-nav__list">
+                <a href="{% url 'services' %}" class="site-nav__link">{% translate "Xizmatlar" %}</a>
+              </li>
+              <li class="site-nav__list">
+                <a href="{% url 'contact' %}" class="site-nav__link">{% translate "Bog'lanish" %}</a>
+              </li>
+            </ul>
+          </div>
+          <!-- SITENAV Btn -->
+          <div class="site-nav-btns">
+            <div class="site-nav__toggle">
+              <div class="dropdown">
+                <button onclick="myFunction()" class="dropbtn">{{ current_language|title }}</button>
+                <div id="myDropdown" class="dropdown-content">
+                  <a href="{% url 'change_lang' "uz" %}">Uz</a>
+                  <a href="{% url 'change_lang' "en" %}">En</a>
+                  <a href="{% url 'change_lang' "ru" %}">Ru</a>
+                </div>
+              </div>
+            </div>
+            <div class="site-nav-btns__wrapper">
+              <button class="site-nav-btns__btn open__modal-btn">
+                {% trans "Gaplashamizmi?" %}
+              </button>
+            </div>
+            <button class="site-nav__menu-icon">
+              <img src="{% static 'assets/icons/menu-icon.svg' %}" alt="Menu__icon" />
+            </button>
+          </div>
+        </div>
+      </nav>
+      <!-- /NAVBAR -->
+
+<!--========================================== Start WRAPPER Section ==========================================-->
+  <div class="wrapper">
+
+{% block content %}
+
+{% endblock content %}
+
+      <!--============================================= Start MODAL section =============================================-->
+      <div class="modal hide">
+        <div class="modal__dialog">
+          <div class="modal__content">
+            <div class="modal__wrapper">
+                <button class="modal__close">
+                  <i class="fa-solid fa-xmark" style="color: #ffffff"></i>
+                </button>
+                <div class="modal__info">
+                  <h3 class="modal__title">{% blocktranslate %}Gaplashamizmi?{% endblocktranslate %}</h3>
+                  <p class="modal__text">
+                    {% blocktranslate %}Loyihangizga yangicha yechim berishni xoxlasangiz quyidagi
+                    maydonlarni to'ldiring, o'zimiz siz bilan bog'lanamiz{% endblocktranslate %}
+                  </p>
+                </div>
+                <form id="modal-contact">
+                  {% csrf_token %}
+                <div class="modal__row">
+                  <div class="modal__name input__wrapper">
+                    <label for="modal__name" class="modal__label input__label"
+                      > {% trans "Ism" %}</label
+                    >
+                    <input
+                      type="text"
+                      name = "name"
+                      class="contact__input modal__name-item"
+                      id="modal__name"
+                    />
+                  </div>
+                  <div class="modal__email input__wrapper">
+                    <label for="modal__email" class="modal__label input__label"
+                      > {% trans "Telefon raqam" %}</label
+                    >
+                    <input
+                      type="text"
+                      name = 'number'
+                      class="contact__input modal__email-item"
+                      id="modal__email"
+                    />
+                  </div>
+                </div>
+                <div class="modal__message input__wrapper">
+                  <label for="modal__message" class="modal__label input__label"
+                    > {% trans "Xabar qoldiring" %}</label
+                  >
+                  <textarea
+                    rows="6"
+                    name = 'message'
+                    class="contact__input modal__message-item"
+                    id="modal__message"
+                  ></textarea>
+                </div>
+                <p id="message1"></p>
+                <button type="submit" class="modal__btn main-btn">
+                  {% trans "Yuborish" %}
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /MODAL -->
+
+      <!--============================================= Start FOOTER section =============================================-->
+      <footer class="footer">
+        <div class="container">
+          <div class="footer__link">
+            <div class="footer__logo site-logo">
+              <a href="{% url 'index' %}" class="logo__item"><img src="{% static 'assets/icons/site-logo.svg' %}" class="site-logo footer__logo-img"></a>
+            </div>
+
+            <!--============================================= FOOTER__MEDIA =============================================-->
+            <div class="footer__media">
+              <a href="https://www.facebook.com/"
+                ><i class="fa-brands fa-facebook-f" style="color: #ffffff"></i
+              ></a>
+              <a href="https://www.instagram.com/megasoft.uz/"
+                ><i class="fa-brands fa-instagram" style="color: #ffffff"></i
+              ></a>
+              <a href="https://twitter.com/"
+                ><i class="fa-brands fa-twitter" style="color: #ffffff"></i
+              ></a>
+            </div>
+            <!-- /FOOTER__MEDIA -->
+
+            <!--============================================= Start FOOTER__MENU =============================================-->
+            <ul class="footer__menu">
+              <li class="footer__menu-list">
+                <a href="{% url 'index' %}" class="footer__menu-link">{% translate "Bosh sahifa"%}</a>
+              </li>
+              <li class="footer__menu-list">
+                <a href="{% url 'about' %}" class="footer__menu-link">{% translate "Biz haqimizda" %}</a>
+              </li>
+              <li class="footer__menu-list">
+                <a href="{% url 'portfolio' %}" class="footer__menu-link">Portfolio</a>
+              </li>
+              <li class="footer__menu-list">
+                <a href="{% url 'services' %}" class="footer__menu-link">{% translate "Xizmatlar" %}</a>
+              </li>
+              <li class="footer__menu-list">
+                <a href="{% url 'contact' %}" class="footer__menu-link">{% translate "Bog'lanish" %}</a>
+              </li>
+            </ul>
+            <!-- /FOOTER__MENU -->
+          </div>
+          <div class="footer__bottom">
+            <p class="footer__desc">
+              &copy; Copyright 2023, All Rights Reserved
+            </p>
+            <div class="footer__bottom-link">
+              <a href="{% url 'conditions' %}">{% trans "Foydalanish shartlari" %}</a>
+              <a href="{% url 'privacy' %}">{% trans "Maxfiylik siyosati" %}</a>
+            </div>
+          </div>
+        </div>
+      </footer>
+      <!-- /FOOTER -->
+    </div>
+    <!-- /WRAPPER -->
+    <script src="{% static 'assets/js/main.js' %}"></script>
+    <script>
+function myFunction() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+
+// Close the dropdown menu if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+    
+
+$(function() {
+$('#contact-form').on('submit', function(event) {
+event.preventDefault();
+
+// Get the CSRF token value
+const message = document.getElementById('message')
+const form1 = document.getElementById('contact-form')
+
+// Create data to send with the request, including the CSRF token
+var formData = $(this).serialize()
+
+$.ajax({
+url: '{% url "contact_post" %}',
+type: 'POST',
+data: formData,
+dataType: 'json',
+success: function(response) {
+  if (response.success) {
+    message.innerText = response.message
+    message.classList = 'msg-success'
+    form1.reset()
+  } else {
+    message.innerText = response.message
+    message.classList = 'msg-error'
+  }
+}
+});
+});
+});
+
+$(function() {
+$('#modal-contact').on('submit', function(event) {
+event.preventDefault();
+
+// Get the CSRF token value
+const modal = document.getElementById('modal')
+const message1 = document.getElementById('message1')
+const form2 = document.getElementById('modal-contact')
+
+// Create data to send with the request, including the CSRF token
+var formData = $(this).serialize()
+
+$.ajax({
+url: '{% url "contact_post" %}',
+type: 'POST',
+data: formData,
+dataType: 'json',
+success: function(response) {
+  if (response.success) {
+    message1.innerText = response.message
+    message1.classList = 'msg-success'
+    form2.reset()
+  } else {
+    message1.innerText = response.message
+    message1.classList = 'msg-error'
+  }
+}
+});
+});
+});
+    </script>
+  </body>
+</html>

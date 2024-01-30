@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+{% load static %}
+{% block stylesheet %}<link rel="stylesheet" href="{% static 'css/portfolio.css' %}" />{% endblock stylesheet %}
+{% block title %}Portfolio{% endblock title %}
+{% load i18n %}
+
+{% block content %}
+      <!--==================================== Start HEADER =========================================== -->
+      <header class="header">
+        <!-- Start PORTFOILIO banner -->
+        <div class="portfolio-page__banner page__banner-bg">
+          <div class="container">
+            <div class="portfolio-page">
+              <h1 class="portfolio-page__title">{% trans "Portfolio" %}</h1>
+              <div class="portfolio-page__links">
+                <a href="{% url 'index' %}" class="portfolio-page__home"
+                  >{% trans "Bosh sahifa" %}</a
+                >
+                <span class="portfolio-page__link-sign"
+                  ><i
+                    class="portfolio-page__icon fa-solid fa-chevron-right"
+                    style="color: #ffffff"
+                  ></i
+                ></span>
+                <a href="{% url 'portfolio' %}" class="portfolio-page__link"
+                  >{% trans "Portfolio" %}</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+      <!-- /HEADER -->
+
+      <!--=============================================== Start MAIN section ===============================================-->
+      <main class="main">
+        <div class="container">
+          <!--=========================================== Start PORTFOLIO section ===========================================-->
+          <div class="portfolio portfolio-page__items">
+            <!-- Portfolio content -->
+            <div class="portfolio__content">
+              <!-- Portfolio Column -->
+              <div class="portfolio__col">
+            
+              {% for item1 in blog_items1 %}
+                <div class="portfolio__item">
+                  <div class="portfolio__img-wrapper">
+                    <a href="#" class="portfolio__link-img">
+                      <img
+                        src="{{ item1.image.url }}"
+                        alt="Food Delivery"
+                        class="portfolio__item-img"
+                      />
+                    </a>
+                  </div>
+                  <h4 class="portfolio__item-title">{{ item1.title }}</h4>
+                  <p class="portfolio__item-text main-text">
+                    {{item1.text}}
+                  </p>
+                  <div class="portfolio__item-link">
+                    <a href="#" class="link__item">
+                      <img
+                        src="{% static 'assets/icons/arrow-right.svg' %}"
+                        alt="Arrow"
+                        class="link__icon"
+                      />
+                    </a>
+                  </div>
+                </div>
+              {% endfor %}
+
+              </div> 
+
+              <!-- Portfolio__column -->
+              <div class="portfolio__col">
+                <!-- Portfolio item -->
+                {% for item in blog_items2 %}
+                <div class="portfolio__item">
+                  <div class="portfolio__img-wrapper">
+                    <a href="" class="portfolio__link-img">
+                      <img
+                        src="{{ item.image.url }}"
+                        alt="Food Delivery"
+                        class="portfolio__item-img"
+                      />
+                    </a>
+                  </div>
+                  <h4 class="portfolio__item-title">
+                    {{ item.title }}
+                  </h4>
+                  <p class="portfolio__item-text main-text">
+                    {{ item.text }}
+                  </p>
+                  <div class="portfolio__item-link">
+                    <a href="#" class="link__item">
+                      <img
+                        src="{% static 'assets/icons/arrow-right.svg' %}"
+                        alt="Arrow"
+                        class="link__icon"
+                      />
+                    </a>
+                  </div>
+                </div>
+                {% endfor %}
+
+              </div>
+              <!-- ************************************************ -->
+            </div>
+          </div>
+          <!-- /PORTFOLIO -->
+          <!-- ICON for main__section bottom -->
+          <img
+            src="{% static 'images/profession__before.svg' %}"
+            alt="Cervices"
+            class="main__section-icons profession__before portfolio-page__after"
+          />
+        </div>
+        <!-- /CONTAINER -->
+
+        <div class="container">
+          {% include "includes/contacts.html" %}
+        </div>
+      </main>
+      <!-- /MAIN -->
+{% endblock content %}

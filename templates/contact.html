@@ -1,0 +1,162 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block stylesheet %}
+<link rel="stylesheet" href="{% static 'css/contact.css' %}" />
+
+<style>
+  .message{
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: #ffffff;
+  color: black;
+  border-radius: 8px;
+  text-align: center;
+  }
+  .msg-success{
+  margin-bottom: 10px;
+  color: green;
+  }
+  .msg-error{
+  margin-bottom: 10px;
+  color: rgb(231, 38, 54);
+  }
+  
+  
+  </style>
+{% endblock stylesheet %}
+{% block title %}Contact{% endblock title %}
+
+{% block content %}
+      <!--====================================== Start HEADER section ======================================-->
+      <header class="header">
+        <!--====================================== Start CONTACT-PAGE__BANNER section ======================================-->
+        <div class="contact-page__banner page__banner-bg">
+          <div class="container">
+            <div class="contact-page">
+              <h1 class="contact-page__title">{% translate "Bog'lanish" %}</h1>
+              <div class="contact-page__links">
+                <a href="{% url 'index' %}" class="contact-page__home">{% translate "Bosh sahifa" %}</a>
+                <span class="contact-page__link-sign"
+                  ><i
+                    class="contact-page__icon fa-solid fa-chevron-right"
+                    style="color: #ffffff"
+                  ></i
+                ></span>
+                <a href="{% url 'contact' %}" class="contact-page__link"
+                  >{% translate "Bog'lanish" %}</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /CONTACT__BANNER -->
+      </header>
+      <!-- /HEADER -->
+
+      <!--=============================================== Start MAIN section ===============================================-->
+      <main class="main">
+        <!--=============================================== Start CONNECTION section ===============================================-->
+
+        <div class="connection">
+          <div class="container">
+            <div class="connection__wrapper">
+              <div class="connection__body">
+                <div class="connection__desc">
+                  <h2 class="connection__title main-title">{% translate "Bog'laning" %}</h2>
+                  <p class="connection__text main-text">
+                    {% blocktranslate %}Quyidagi maydonlarni to'ldirgan holda biz bilan
+                    bog'lanishingiz mumkin, yoki pastda bizning manzil va
+                    telefon raqamimiz bor, bemalol bog'lanishingiz mumkin{% endblocktranslate %}
+                  </p>
+                </div>
+                <div class="connection__info">
+                  <h3 class="connection__info-title">{% translate "Bizning ofis" %}</h3>
+                  <div class="connection__img-wrapper">
+                    <img
+                      src="{% static 'images/connection__img.png' %}"
+                      alt="Img"
+                      class="connection__img"
+                    />
+                  </div>
+                  <h4 class="connection__location">{% translate "New York, USA" %}</h4>
+                  <span class="contact__details main-text"
+                    ><i
+                      class="details__icons fa-solid fa-location-dot"
+                      style="color: #ffffff"
+                    ></i
+                    >{% translate "3891 Ranchview Dr. Richardson, California 62639" %}</span
+                  >
+                  <span class="contact__details main-text">
+                    <i
+                      class="details__icons fa-solid fa-phone-volume"
+                      style="color: #ffffff"
+                    ></i>
+                    {% translate "(201) 555-0124" %}</span
+                  >
+                </div>
+              </div>
+              <div class="connection__form">
+                <form action="post" class="contact__page-form" id='contact-form'>
+                  {% csrf_token %}
+                  <label for="connection__name" class="connection__label"
+                    >{% translate "Ism familiya" %}</label
+                  >
+                  <input
+                    type="text"
+                    name="name"
+                    class="connection__input"
+                    id="connection__name"
+                    placeholder="{% translate "Abdullayev Abdulla" %}"
+                  />
+
+                  <label for="connection__number" class="connection__label"
+                    >{% translate "Telefon raqam" %}</label
+                  >
+                  <input
+                    type="text"
+                    name="number"
+                    class="connection__input"
+                    id="connection__number"
+                    placeholder="{% translate "+998(99) 999 99 99" %}"
+                  />
+
+                  <label for="connection__company" class="connection__label"
+                    >{% translate "Kompaniya nomi" %}</label
+                  >
+                  <input
+                    type="text"
+                    name="company"
+                    class="connection__input"
+                    id="connection__company"
+                    placeholder="Megasoft"
+                  />
+
+                  <label for="connection__message" class="connection__label"
+                    >{% translate "Xabar" %}</label
+                  >
+                  <textarea
+                    id="connection__message"
+                    name = "message"
+                    class="connection__input connection__message"
+                    rows="7"
+                    placeholder="{% translate "Biror xabar yozing"%}"
+                  ></textarea>
+                  
+                  <button type="submit" class="main-btn">{% translate "Yuborish" %}</button><br><br>
+                  <p id="message"></p>
+                </form>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- /CONNECTION -->
+      </main>
+      <!-- /MAIN -->
+
+      {% endblock content %}

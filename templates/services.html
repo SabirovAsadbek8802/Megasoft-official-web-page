@@ -1,0 +1,206 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+{% block stylesheet %}<link rel="stylesheet" href="{% static 'css/services.css' %}" />{% endblock stylesheet %}
+
+{% block title %}Services{% endblock title %}
+
+{% block content %}
+
+      <!--==================================== Start HEADER =========================================== -->
+      <header class="header">
+        <!-- Start PORTFOILIO banner -->
+        <div class="services-page__banner page__banner-bg">
+          <div class="container">
+            <div class="services-page">
+              <h1 class="services-page__title">{% trans "Services" %}</h1>
+              <div class="services-page__links">
+                <a href="{% url 'index' %}" class="services-page__home">{% trans "Bosh sahifa" %}</a>
+                <span class="services-page__link-sign"
+                  ><i
+                    class="services-page__icon fa-solid fa-chevron-right"
+                    style="color: #ffffff"
+                  ></i
+                ></span>
+                <a href="{% url 'services' %}" class="services-page__link">{% trans "Services" %}</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+      <!-- /HEADER -->
+
+      <!--=============================================== Start MAIN section ===============================================-->
+      <main class="main">
+        <div class="container">
+          <!--=========================================== Start SERVICES Section ===========================================-->
+          <div class="services services-page__items">
+            <div class="services-content">
+              <div class="services-content-row">
+                
+                {% for item in services %}
+                <div class="services-content__cards main-cards">
+                  <div class="services__main-content">
+                    <img
+                      src="{{ item.image.url }}"
+                      alt="Crm platform"
+                      class="services__cards-icon"
+                    />
+                    <h3 class="services__cards-title main-cards__title">
+                      {{ item.title }}
+                    </h3>
+                    <p class="services__cards-desc main-text">
+                      {{ item.text }}
+                    </p>
+                  </div>
+                  <a href class="services__cards-link">
+                    <img
+                      src="{% static 'assets/icons/Arrow-circle.svg' %}"
+                      alt="Arrow"
+                      class="arrow__icon"
+                    />
+                  </a>
+                </div>
+                <!-- *************************** -->
+                {% endfor %}
+                
+                {% comment %} <div class="services-content__cards main-cards">
+                  <div class="services__main-content">
+                    <img
+                      src="{% static 'assets/icons/fountain pen.svg' %}"
+                      alt="Crm platform"
+                      class="services__cards-icon"
+                    />
+                    <h3 class="services__cards-title main-cards__title">
+                      UX/UI Dizayn
+                    </h3>
+                    <p class="services__cards-desc main-text">
+                      UI/UX dizayni har qanday foydalanuvchi interfeysining
+                      dizayni bo’lib, unda qulaylik tashqi ko’rinish kabi
+                      muhimdir.
+                    </p>
+                  </div>
+                  <a href class="services__cards-link">
+                    <img
+                      src="{% static 'assets/icons/Arrow-circle.svg' %}"
+                      alt
+                      class="arrow__icon"
+                    />
+                  </a>
+                </div>
+                <!-- ****************************** -->
+                <div class="services-content__cards main-cards">
+                  <div class="services__main-content">
+                    <img
+                      src="{% static 'assets/icons/web.svg' %}"
+                      alt="Crm platform"
+                      class="services__cards-icon"
+                    />
+                    <h3 class="services__cards-title main-cards__title">
+                      Veb-ishlab chiqish
+                    </h3>
+                    <p class="services__cards-desc main-text">
+                      Veb-ishlab chiqish gazeta, dizayn va marketing sohalrini
+                      o’z ichida mujassamlagan gibrid sohalardan biridir.
+                    </p>
+                  </div>
+                  <a href class="services__cards-link">
+                    <img
+                      src="{% static 'assets/icons/Arrow-circle.svg' %}"
+                      alt
+                      class="arrow__icon"
+                    />
+                  </a>
+                </div>
+                <div class="services-content__cards main-cards">
+                  <div class="services__main-content">
+                    <img
+                      src="{% static 'assets/icons/Mobile.svg' %}"
+                      alt="Crm platform"
+                      class="services__cards-icon"
+                    />
+                    <h3 class="services__cards-title main-cards__title">
+                      Mobil ilovalarni ishlab chiqish
+                    </h3>
+                    <p class="services__cards-desc main-text">
+                      Smartfon va planshetlar kabi mobil qurilmalarda ishlash
+                      uchun maxsus ishlab chiqilgan dasturiy ilovalarni yaratish
+                      jarayoni.
+                    </p>
+                  </div>
+                  <a href class="services__cards-link">
+                    <img
+                      src="{% static 'assets/icons/Arrow-circle.svg' %}"
+                      alt
+                      class="arrow__icon"
+                    />
+                  </a>
+                </div>
+                <!-- *************************** -->
+                <div class="services-content__cards main-cards">
+                  <div class="services__main-content">
+                    <img
+                      src="{% static 'assets/icons/WebStore.svg' %}"
+                      alt="Crm platform"
+                      class="services__cards-icon"
+                    />
+                    <h3 class="services__cards-title main-cards__title">
+                      Internet do’kon
+                    </h3>
+                    <p class="services__cards-desc main-text">
+                      Internet-do’kon — elektron savdo-sotiq shakli, tovarlarni
+                      Internet orqali sotishga mo’ljallangan veb-sayt.
+                    </p>
+                  </div>
+                  <a href class="services__cards-link">
+                    <img
+                      src="{% static 'assets/icons/Arrow-circle.svg' %}"
+                      alt
+                      class="arrow__icon"
+                    />
+                  </a>
+                </div>
+                <!-- ****************************** -->
+                <div class="services-content__cards main-cards">
+                  <div class="services__main-content">
+                    <img
+                      src="{% static 'assets/icons/Writer.svg' %}"
+                      alt="Crm platform"
+                      class="services__cards-icon"
+                    />
+                    <h3 class="services__cards-title main-cards__title">
+                      Kontent yozish
+                    </h3>
+                    <p class="services__cards-des main-text">
+                      Veb-saytlar, bloglar, ijtimoiy media platformalari va
+                      boshqalar kabi turli xil vositalar uchun yozma materiallar
+                      yaratish jaryoni.
+                    </p>
+                  </div>
+                  <a href class="services__cards-link">
+                    <img
+                      src="{% static 'assets/icons/Arrow-circle.svg' %}"
+                      alt
+                      class="arrow__icon"
+                    />
+                  </a>
+                </div> {% endcomment %}
+              
+              
+              </div>
+            </div>
+          </div>
+          <!-- ICON for main__section top -->
+          <img
+            src="{% static 'images/Cervices__before.svg' %}"
+            alt="Cervices"
+            class="main__section-icons cervices__before services-page__after"
+          />
+        </div>
+
+        <div class="container">
+          {% include "includes/contacts.html" %}
+        </div>
+      </main>
+      <!-- /MAIN -->
+{% endblock content %}

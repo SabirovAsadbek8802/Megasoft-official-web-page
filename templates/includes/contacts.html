@@ -1,0 +1,111 @@
+{% load i18n %}
+
+<!--********************************* Start CONTACT Section ************************************ -->
+          <!--=========================================== Start CONTACT section ===========================================-->
+          <div class="contact">
+            <div class="contact__info">
+              <h3 class="contact__title main-title">{% translate "Savollaringiz bormi?" %}</h3>
+              <p class="contact__desc main-text">
+                {% blocktranslate %}Bizga savol yoki murajatlaringiz bo'lsa yo'lashingiz mumkin. Biz
+                sizga iloji boricha tezda javob berishga harakat qilamiz..{% endblocktranslate %}
+              </p>
+              <span class="contact__details main-text">
+                <i
+                  class="details__icons fa-solid fa-phone-volume"
+                  style="color: #ffffff"
+                ></i>
+                {% translate "(201) 555-0124" %}</span
+              >
+              <span class="contact__details main-text"
+                ><i
+                  class="details__icons fa-solid fa-envelope"
+                  style="color: #ffffff"
+                ></i
+                >{% translate "agish.studio@example.com" %}</span
+              >
+              <span class="contact__details main-text"
+                ><i
+                  class="details__icons fa-solid fa-location-dot"
+                  style="color: #ffffff"
+                ></i
+                >{% blocktranslate %}3891 Ranchview Dr. Richardson, California 62639{% endblocktranslate %}</span
+              >
+            </div>
+            <div class="contact__form">
+              <form id="contact-form">
+                {% csrf_token %}
+                <div class="contact__row">
+                  <div class="contact__name input__wrapper">
+                    <label
+                      for="contact__name"
+                      class="contact__label input__label"
+                      >{% trans "Ism" %}</label
+                    >
+                    <input
+                      type="text"
+                      name="name"
+                      class="contact__input contact__name-item"
+                      id="contact__name"
+                    />
+                  </div>
+                  <div class="contact__email input__wrapper">
+                    <label
+                      for="contact__email"
+                      class="contact__label input__label"
+                      >Email</label
+                    >
+                    <input
+                      type="text"
+                      name="email"
+                      class="contact__input contact__email-item"
+                      id="contact__email"
+                    />
+                  </div>
+                </div>
+                <div class="contact__message input__wrapper">
+                  <label
+                    for="contact__message"
+                    class="contact__label input__label"
+                    >{% trans "Xabar yozing" %}</label
+                  >
+                  <textarea
+                    rows="6"
+                    name="message"
+                    class="contact__input contact__message-item"
+                    id="contact__message"
+                  ></textarea>
+                </div>
+                <p id="message"></p>
+                <button type="submit" class="contact__btn main-btn">
+                  {% trans "Yuborish" %}
+                </button>
+              </form>
+            </div>
+          </div>
+          <!-- /CONTACT -->
+   
+
+{% block stylesheet %}
+<style>
+  .message{
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: #ffffff;
+    color: black;
+    border-radius: 8px;
+    text-align: center;
+  }
+  .msg-success{
+    margin-bottom: 10px;
+    color: green;
+  }
+  .msg-error{
+    margin-bottom: 10px;
+    color: rgb(231, 38, 54);
+  }
+
+
+</style>
+{% endblock stylesheet %}

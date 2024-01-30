@@ -1,0 +1,327 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+{% get_current_language as current_language %}
+
+
+{% block title %}Main Page{% endblock title %}
+
+
+
+{% block content %}
+      <!--====================================== Start HEADER section ======================================-->
+      <header class="header">
+        <div class="container">
+          <!-- Start HEADER-BANNER section  -->
+          <div class="header-banner">
+            <div class="banner__text">
+              <div class="banner__title">
+                {% if current_language == 'uz' %}
+                  {%include 'includes/uz_lang.html'%}
+                {% elif current_language == 'en' %}
+                {%include 'includes/en_lang.html'%}
+                {% elif current_language == 'ru' %}
+                {%include 'includes/ru_lang.html'%}
+                {%endif%}
+                <div class="banner__bg">
+                  <img
+                    src="{% static 'images/Group__before.svg' %}"
+                    alt="Before"
+                    class="banner__bg-item"
+                  />
+                </div>
+              </div>
+              <div class="banner__info">
+                <p class="banner__desc main-text">{% blocktranslate %}Tuzilishni loyihalashda sahifaning o'qilishi mumkin 
+                  bo'lgan mazmuni o'quvchini chalg'itmasligi va uning umumiy tajribasini
+                  oshirishiga ishonch hosil qilish juda muhim.{% endblocktranslate %}
+                </p>
+                <button class="banner__btn main-btn open__modal-btn">
+                  {% translate "Boshlash" %}
+                </button>
+              </div>
+            </div>
+
+            <div class="header-banner-img">
+              <img
+                src="{% static 'images/banner-image.png' %}"
+                alt="Banner image"
+                class="header-banner-img__item"
+              />
+
+              <span class="header__bg-scrolling"></span>
+
+              <img
+                src="{% static 'assets/icons/Scrolling-Text.svg' %}"
+                alt="Ellipse"
+                class="header-banner__ellipse"
+              />
+
+              <img
+                src="{% static 'assets/icons/arrow-up.svg' %}"
+                alt="Arrow"
+                class="header-banner__arrow"
+              />
+            </div>
+          </div>
+          <!-- /FOOTER-BANNER -->
+        </div>
+      </header>
+      <!-- /HEADER -->
+
+      <!--=============================================== Start MAIN section ===============================================-->
+      <main class="main">
+        <!--============================================ Sart MAIN__SECTION section ============================================-->
+        <section id="main__section">
+          <!--============================================ Sart CONTAINER section ============================================-->
+          <div class="container">
+            <!-- ICON for main__section top -->
+            <img
+              src="{% static 'images/Cervices__before.svg' %}"
+              alt="Cervices"
+              class="main__section-icons cervices__before"
+            />
+            <!--=========================================== Start SERVICES Section ===========================================-->
+            <div class="services">
+              <div class="services-info">
+                <h2 class="services-info__title main-title">
+                  {% translate "Bizning xizmatlarimiz" %}
+                </h2>
+                <p class="services-desc main-text">
+                  {% blocktranslate %}Hayotingizni osonlashtirish va qimmatli vaqtingizni tejash
+                  uchun mo'ljallangan xizmatlarimiz bilan tanishing.{% endblocktranslate %}
+                </p>
+              </div>
+              <div class="services-content">
+                <div class="services-content-row">
+                  
+                  {% for service in services1 %}
+                  <div class="services-content__cards main-cards">
+                    <div class="services__main-content">
+                      <img
+                        src="{{service.image.url}}"
+                        alt="Crm platform"
+                        class="services__cards-icon"
+                      />
+                      <h3 class="services__cards-title main-cards__title">
+                        {{service.title}}
+                      </h3>
+                      <p class="services__cards-desc main-text">
+                        {{service.text}}
+                      </p>
+                    </div>
+                    <a href="{% url 'services' %}" class="services__cards-link">
+                      <img
+                        src="{% static 'assets/icons/Arrow-circle.svg' %}"
+                        alt="Arrow"
+                        class="arrow__icon"
+                      />
+                    </a>
+                  </div>
+                  <!-- *************************** -->
+                  {% endfor %}
+
+                </div>
+              </div>
+            </div>
+            <!--====================================== Start PROFESSION__TITLE section ======================================-->
+            <div class="title__profession">
+              <h2 class="main-title">{% translate "Bizning yondashuvimiz" %}</h2>
+              <p class="main-text">
+                {% blocktranslate %}Yangi bilim,tushuncha yoki tushunchaga ega bo'lish uchun muayyan
+                mavzuni tizimli tekshirish,o'rganish va tahlil qilish.{% endblocktranslate %}
+              </p>
+            </div>
+            <!-- /PROFESSION__TITLE -->
+
+            <!--========================================== Start PROFESSION section ==========================================-->
+            {%for i in images%}
+            <div class="profession">
+              <div class="profession__imgs-wrapper">
+                <div class="profession__img">
+                  <img src="{{ i.image1.url }}" alt="Group Work" />
+                </div>
+                <div class="profession__collection">
+                  <div class="collection__items profession__img">
+                    <img src="{{i.image2.url}}" alt="Project" />
+                  </div>
+                  <div class="collection__items profession__img">
+                    <img src="{{i.image3.url}}" alt="Project" />
+                  </div>
+                </div>
+              </div>
+              <div class="profession__cards">
+                <!-- ****************************** -->
+                
+                {% for i in works %}
+                <div class="profession__cards-item main-cards">
+                  <img
+                    src="{{i.image.url}}"
+                    alt="Crm platform"
+                    class="profession__cards-icon"
+                  />
+                  <h3 class="profession__cards-title main-cards__title">
+                    {{i.title}}
+                  </h3>
+                  <p class="profession__cards-desc main-text">
+                    {{i.text}}
+                  </p>
+                </div>
+                {% endfor %}
+                
+              </div>
+            </div>
+            {%endfor%}
+            <!-- /PROFESSION -->
+
+            <!-- ICON for main__section bottom -->
+            <img
+              src="{% static 'images/profession__before.svg' %}"
+              alt="Cervices"
+              class="main__section-icons profession__before"
+            />
+          </div>
+          <!-- /CONATAINER -->
+        </section>
+        <!-- /MAIN__SECTION -->
+
+        <!--============================================ Sart CONTAINER section ============================================-->
+        <div class="container">
+          <!--=========================================== Start PORTFOLIO section ===========================================-->
+          <div class="portfolio">
+            <div class="portfolio__info">
+              <h3 class="portfolio__title main-title">{% translate "Bizning portfelimiz" %}</h3>
+              <p class="portfolio__desc main-text">
+                {% blocktranslate %}Biz o'z portfelimizga Ui/Ux dizaynlarimizni, web-sayt
+                dizaynlarni,banner va shunga o'xshash ishlarimizni joyladik.{% endblocktranslate %}
+              </p>
+            </div>
+<!-- Portfolio item -->
+            <!-- Portfolio content -->
+            <div class="portfolio__content">
+              <!-- Portfolio Column -->
+              <div class="portfolio__col">
+                
+                <div class="portfolio__item">
+                  
+                  <div class="portfolio__img-wrapper">
+                    
+                    <a href="{% url 'portfolio' %}" class="portfolio__link-img">
+                      
+                      <img
+                        src="{{portfolio1.image.url}}"
+                        
+                        class="portfolio__item-img"
+                      />
+                    </a>
+                  </div>
+                  <h4 class="portfolio__item-title">{{portfolio1.title}}</h4>
+                  <p class="portfolio__item-text main-text">
+                    {{portfolio1.text}}
+                  </p>
+                  <div class="portfolio__item-link">
+                    <a href="{% url 'portfolio' %}" class="link__item">
+                      <img
+                        src="{% static 'assets/icons/arrow-right.svg' %}"
+                        alt="Arrow"
+                        class="link__icon"
+                      />
+                    </a>
+                  </div>
+                </div>
+
+                <div class="portfolio__item">
+                  
+                  <div class="portfolio__img-wrapper">
+                    
+                    <a href="{% url 'portfolio' %}" class="portfolio__link-img">
+                      
+                      <img
+                        src="{{portfolio2.image.url}}"
+                        
+                        class="portfolio__item-img"
+                      />
+                    </a>
+                  </div>
+                  <h4 class="portfolio__item-title">{{portfolio2.title}}</h4>
+                  <p class="portfolio__item-text main-text">
+                    {{portfolio2.text}}
+                  </p>
+                  <div class="portfolio__item-link">
+                    <a href="{% url 'portfolio' %}" class="link__item">
+                      <img
+                        src="{% static 'assets/icons/arrow-right.svg' %}"
+                        alt="Arrow"
+                        class="link__icon"
+                      />
+                    </a>
+                  </div>
+                </div>
+
+              </div>
+              
+              <!-- Portfolio__column -->
+              <div class="portfolio__col">
+                <!-- Portfolio item -->
+                <div class="portfolio__item">
+                  <div class="portfolio__img-wrapper">
+                    <a href="{% url 'portfolio' %}" class="portfolio__link-img">
+                      <img
+                        src="{{portfolio3.image.url}}"
+                        
+                        class="portfolio__item-img"
+                      />
+                    </a>
+                  </div>
+                  <h4 class="portfolio__item-title">{{portfolio3.title}}</h4>
+                  <p class="portfolio__item-text main-text">
+                    {{portfolio3.text}}
+                  </p>
+                  <div class="portfolio__item-link">
+                    <a href="{% url 'portfolio' %}" class="link__item">
+                      <img
+                        src="{% static 'assets/icons/arrow-right.svg' %}"
+                        alt="Arrow"
+                        class="link__icon"
+                      />
+                    </a>
+                  </div>
+                </div>
+
+                <div class="portfolio__item">
+                  <div class="portfolio__img-wrapper">
+                    <a href="{% url 'portfolio' %}" class="portfolio__link-img">
+                      <img
+                        src="{{portfolio4.image.url}}"
+                        
+                        class="portfolio__item-img"
+                      />
+                    </a>
+                  </div>
+                  <h4 class="portfolio__item-title">{{portfolio4.title}}</h4>
+                  <p class="portfolio__item-text main-text">
+                    {{portfolio4.text}}
+                  </p>
+                  <div class="portfolio__item-link">
+                    <a href="{% url 'portfolio' %}" class="link__item">
+                      <img
+                        src="{% static 'assets/icons/arrow-right.svg' %}"
+                        alt="Arrow"
+                        class="link__icon"
+                      />
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <!-- ************************************************ -->
+            </div>
+          </div>
+          <!-- /PORTFOLIO -->
+
+          {% include "includes/contacts.html" %}
+        </div>
+        <!-- /CONTAINER -->
+      </main>
+      <!-- /MAIN -->
+
+{% endblock content %}
